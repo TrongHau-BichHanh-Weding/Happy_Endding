@@ -240,9 +240,9 @@
 
 .calendar-header-row {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 20px;
-  margin-bottom: 16px;
+  gap: 14px;
 }
 
 .calendar-big-date {
