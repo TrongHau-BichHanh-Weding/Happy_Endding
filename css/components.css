@@ -1,0 +1,392 @@
+/* ============================================
+   COMPONENTS.CSS - Các component đặc biệt
+   Bao gồm: Hộp quà (Gift Box), Nhạc nền,
+   Nút scroll to top, Countdown timer
+   ============================================ */
+
+/* ============ HỘP QUÀ (GIFT BOX) ============ */
+#gift {
+  background: var(--mint);
+}
+
+/* ---- Hộp quà 3D ---- */
+.giftbox-scene {
+  perspective: 800px;
+  margin: 32px auto;
+  width: 160px;
+  height: 200px;
+}
+
+.giftbox {
+  width: 160px;
+  height: 200px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.giftbox:hover {
+  transform: translateY(-6px);
+}
+
+/* Phần thân hộp */
+.box-body {
+  position: absolute;
+  bottom: 0;
+  width: 160px;
+  height: 140px;
+  background: linear-gradient(135deg, #e8d5b0, #c9a96e);
+  border-radius: 6px 6px 10px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(201,169,110,0.4);
+}
+
+/* Dải nơ dọc */
+.box-ribbon-v {
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  background: linear-gradient(to right, #a07840, #c9a96e, #a07840);
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+}
+
+/* Dải nơ ngang */
+.box-ribbon-h {
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  background: linear-gradient(to bottom, #a07840, #c9a96e, #a07840);
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 2px;
+}
+
+/* Phần nắp hộp */
+.box-lid {
+  position: absolute;
+  top: 0;
+  width: 160px;
+  height: 68px;
+  background: linear-gradient(135deg, #d4b97a, #c9a96e);
+  border-radius: 8px 8px 0 0;
+  transform-origin: bottom center;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 0 -4px 12px rgba(201,169,110,0.3);
+  z-index: 2;
+}
+
+/* Nơ trên nắp */
+.box-bow {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 36px;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              top 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.bow-left, .bow-right {
+  position: absolute;
+  width: 32px;
+  height: 28px;
+  border-radius: 50% 50% 50% 0;
+  background: linear-gradient(135deg, #8b5e2a, #c9a96e);
+  top: 0;
+}
+.bow-left  { left: 0; transform: rotate(-35deg); }
+.bow-right { right: 0; transform: rotate(35deg) scaleX(-1); }
+
+.bow-knot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: var(--gold);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* ---- Trạng thái mở hộp ---- */
+.giftbox.opened .box-lid {
+  transform: rotateX(-130deg);
+}
+.giftbox.opened .box-bow {
+  top: -80px;
+  transform: translateX(-50%) rotateX(-130deg);
+}
+
+/* ---- Nhấp nháy để gợi ý bấm ---- */
+@keyframes bounce-hint {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.giftbox:not(.opened) {
+  animation: bounce-hint 2.5s ease-in-out infinite;
+}
+.giftbox:not(.opened):hover {
+  animation: none;
+}
+
+/* ---- Nội dung bên trong hộp ---- */
+.gift-content {
+  display: none;
+  margin-top: 24px;
+  animation: fadeUp 0.5s ease both;
+}
+.gift-content.show { display: block; }
+
+.qr-container {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 28px 20px;
+  box-shadow: 0 8px 28px var(--shadow);
+  text-align: center;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 480px) {
+  .qr-container { grid-template-columns: 1fr 1fr; }
+}
+
+.qr-card {
+  text-align: center;
+}
+
+.qr-card-name {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+
+.qr-img-wrap {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 10px;
+  border: 3px solid var(--gold-light);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9f9f9;
+}
+
+.qr-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Placeholder QR khi chưa có ảnh thật */
+.qr-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--gold);
+  font-size: 2.4rem;
+}
+
+.qr-bank-info {
+  font-size: 0.78rem;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.qr-bank-info strong {
+  color: var(--dark);
+  display: block;
+  font-size: 0.82rem;
+}
+
+/* ============ NHẠC NỀN ============ */
+.music-btn {
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  z-index: 800;
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.92);
+  border: 2px solid var(--gold-light);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px var(--shadow);
+  transition: all 0.3s ease;
+  font-size: 1.3rem;
+}
+
+.music-btn:hover {
+  background: var(--gold);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Hiệu ứng sóng nhạc */
+.music-btn.playing::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+  animation: music-ring 1.5s ease infinite;
+}
+
+@keyframes music-ring {
+  0%   { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ============ NÚT SCROLL TO TOP ============ */
+.scroll-top-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 800;
+  width: 48px;
+  height: 48px;
+  background: rgba(44,44,44,0.85);
+  color: white;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
+.scroll-top-btn.visible {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+  background: var(--gold);
+  transform: translateY(-3px);
+}
+
+/* ============ COUNTDOWN TIMER ============ */
+.countdown-wrap {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+
+.countdown-unit {
+  text-align: center;
+  min-width: 64px;
+}
+
+.countdown-num {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1;
+  display: block;
+  position: relative;
+}
+
+/* Hiệu ứng flip khi số thay đổi */
+.countdown-num.flip {
+  animation: flip-num 0.5s ease;
+}
+
+@keyframes flip-num {
+  0%   { transform: rotateX(0deg); }
+  50%  { transform: rotateX(90deg); opacity: 0.3; }
+  100% { transform: rotateX(0deg); opacity: 1; }
+}
+
+.countdown-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  margin-top: 4px;
+  display: block;
+}
+
+.countdown-separator {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--gold-light);
+  align-self: flex-start;
+  padding-top: 6px;
+}
+
+/* ============ TRÁI TIM RƠI (FLOATING HEARTS) ============ */
+/* Hiệu ứng trái tim bay lên và rơi xuyên suốt trang */
+
+.heart-particle {
+  position: fixed;
+  bottom: -60px;               /* bắt đầu dưới màn hình */
+  pointer-events: none;
+  z-index: 50;
+  font-size: var(--heart-size, 1.2rem);
+  opacity: 0;
+  user-select: none;
+  will-change: transform, opacity;
+  animation:
+    heart-rise var(--heart-dur, 6s) ease-in forwards,
+    heart-sway calc(var(--heart-dur, 6s) * 0.6) ease-in-out alternate infinite;
+}
+
+/* Bay lên theo chiều dọc + fade */
+@keyframes heart-rise {
+  0%   { transform: translateY(0)       rotate(var(--heart-rot, 0deg)) scale(0.5); opacity: 0; }
+  8%   { opacity: 0.9; }
+  60%  { opacity: 0.75; }
+  90%  { opacity: 0.2; }
+  100% { transform: translateY(-110vh)  rotate(calc(var(--heart-rot,0deg) + 45deg)) scale(1.1); opacity: 0; }
+}
+
+/* Lắc nhẹ sang trái phải độc lập */
+@keyframes heart-sway {
+  0%   { margin-left: 0; }
+  100% { margin-left: var(--heart-drift, 30px); }
+}
+
+/* ============ CONFETTI KHI MỞ HỘP QUÀ ============ */
+.confetti-piece {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  z-index: 9999;
+  pointer-events: none;
+  animation: confetti-fall var(--dur, 1.5s) ease-in forwards;
+}
+
+@keyframes confetti-fall {
+  0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}

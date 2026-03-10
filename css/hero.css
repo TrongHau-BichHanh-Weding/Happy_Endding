@@ -1,0 +1,112 @@
+/* ============================================
+   HERO.CSS - Phần đầu trang (Hero Section)
+   Bao gồm: background, tên đôi uyên ương,
+   ảnh cưới chính, hiệu ứng hoa rơi
+   ============================================ */
+
+/* ---- Hero wrapper ---- */
+#hero {
+  min-height: 100svh;
+  background: linear-gradient(160deg, #e8f4f1 0%, #f5ebe8 50%, #e8f4f1 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 48px 20px 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---- Hoa trang trí góc ---- */
+.hero-deco {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.18;
+}
+.hero-deco-tl { top: -30px; left: -30px; width: 220px; transform: rotate(-15deg); }
+.hero-deco-br { bottom: -30px; right: -30px; width: 220px; transform: rotate(165deg); }
+
+/* ---- Wedding Invitation heading ---- */
+.hero-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 8vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--dark);
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 6px;
+  animation: fadeDown 1s ease both;
+}
+
+/* ---- Đường kẻ dưới heading ---- */
+.hero-line {
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
+  margin: 10px auto 16px;
+  animation: fadeDown 1s 0.2s ease both;
+}
+
+/* ---- Tên đôi uyên ương ---- */
+.hero-names {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 28px;
+  animation: fadeDown 1s 0.35s ease both;
+}
+
+.hero-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-style: italic;
+  color: var(--dark);
+}
+
+.hero-ampersand {
+  color: var(--gold);
+  font-size: 1.6rem;
+}
+
+/* ---- Khung ảnh cưới chính ---- */
+.hero-photo-wrap {
+  width: min(85vw, 380px);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 16px 48px rgba(44,44,44,0.18);
+  animation: fadeUp 1s 0.5s ease both;
+  position: relative;
+}
+
+.hero-photo-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ---- Petals rơi (canvas overlay) ---- */
+#petals-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ---- Animations ---- */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 380px) {
+  .hero-names { flex-direction: column; gap: 4px; }
+}
