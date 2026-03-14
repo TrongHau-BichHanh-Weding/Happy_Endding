@@ -8,15 +8,14 @@ const Slideshow = (() => {
   // ---- Danh sách toàn bộ ảnh album ----
   // Thay các URL này bằng đường dẫn ảnh thực trong assets/
   const ALL_PHOTOS = [
-    { src: 'https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80', alt: 'Ảnh cưới 1' },
-    { src: 'https://images.unsplash.com/photo-1583939411023-14783179e581?w=800&q=80', alt: 'Ảnh cưới 2' },
-    { src: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80', alt: 'Ảnh cưới 3' },
-    { src: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=800&q=80', alt: 'Ảnh cưới 4' },
-    { src: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800&q=80', alt: 'Ảnh cưới 5' },
-    { src: 'https://images.unsplash.com/photo-1591604021695-0c69b7c05981?w=800&q=80', alt: 'Ảnh cưới 6' },
-    { src: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?w=800&q=80', alt: 'Ảnh cưới 7' },
-    { src: 'https://images.unsplash.com/photo-1550005809-91ad75fb315f?w=800&q=80', alt: 'Ảnh cưới 8' },
-    { src: 'https://images.unsplash.com/photo-1621452773781-0f992fd1f5cb?w=800&q=80', alt: 'Ảnh cưới 9' },
+    { src: 'image/IMG_1792.JPG', alt: 'Ảnh cưới 1' },
+    { src: 'image/IMG_1758.JPG', alt: 'Ảnh cưới 2' },
+    { src: 'image/IMG_1796.JPG', alt: 'Ảnh cưới 3' },
+    { src: 'image/IMG_1759.JPG', alt: 'Ảnh cưới 4' },
+    { src: 'image/IMG_1760.JPG', alt: 'Ảnh cưới 5' },
+    { src: 'image/IMG_1797.JPG', alt: 'Ảnh cưới 6' },
+    { src: 'image/IMG_1806.JPG', alt: 'Ảnh cưới 7' },
+    { src: 'image/IMG_1807.JPG', alt: 'Ảnh cưới 8' },
   ];
 
   let currentIndex = 0;
