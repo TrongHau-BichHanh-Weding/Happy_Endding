@@ -8,14 +8,14 @@ const Slideshow = (() => {
   // ---- Danh sách toàn bộ ảnh album ----
   // Thay các URL này bằng đường dẫn ảnh thực trong assets/
   const ALL_PHOTOS = [
-    { src: 'image/IMG_1792.JPG', alt: 'Ảnh cưới 1' },
-    { src: 'image/IMG_1758.JPG', alt: 'Ảnh cưới 2' },
-    { src: 'image/IMG_1796.JPG', alt: 'Ảnh cưới 3' },
-    { src: 'image/IMG_1759.JPG', alt: 'Ảnh cưới 4' },
-    { src: 'image/IMG_1760.JPG', alt: 'Ảnh cưới 5' },
-    { src: 'image/IMG_1797.JPG', alt: 'Ảnh cưới 6' },
-    { src: 'image/IMG_1806.JPG', alt: 'Ảnh cưới 7' },
-    { src: 'image/IMG_1807.JPG', alt: 'Ảnh cưới 8' },
+    { src: 'image/IMG_1792.JPG', alt: 'Ảnh cưới 1'},
+    { src: 'image/IMG_1758.JPG', alt: 'Ảnh cưới 2'},
+    { src: 'image/IMG_1796.JPG', alt: 'Ảnh cưới 3'},
+    { src: 'image/IMG_1759.JPG', alt: 'Ảnh cưới 4', pos: 'center 25%' },
+    { src: 'image/IMG_1760.JPG', alt: 'Ảnh cưới 5', pos: 'center 10%', important: true, height: '165px !important' },
+    { src: 'image/IMG_1797.JPG', alt: 'Ảnh cưới 6',pos: 'center 25%'},
+    { src: 'image/IMG_1806.JPG', alt: 'Ảnh cưới 7',pos: 'center 25%'},
+    { src: 'image/IMG_1807.JPG', alt: 'Ảnh cưỜi 8',pos: 'center 35%'},
   ];
 
   let currentIndex = 0;
@@ -37,7 +37,8 @@ const Slideshow = (() => {
       <div class="slideshow-main" id="ss-main">
         ${ALL_PHOTOS.map((p, i) => `
           <img class="slide-img${i === 0 ? ' active' : ''}"
-               src="${p.src}" alt="${p.alt}" loading="lazy" />
+               src="${p.src}" alt="${p.alt}" loading="lazy"
+               style="object-position: ${p.pos || 'center'}" />
         `).join('')}
 
         <!-- Nút điều hướng trái phải -->
