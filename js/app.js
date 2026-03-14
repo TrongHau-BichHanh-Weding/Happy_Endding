@@ -40,4 +40,9 @@ document.addEventListener('DOMContentLoaded', () => {
     musicBtn.addEventListener('click', () => MusicPlayer.toggle());
   }
 
+  /* ---- 10. Khởi động hiệu ứng Mở Phong Bì ---- */
+  if (typeof Envelope !== 'undefined') {
+    Envelope.init();
+  }
+
 });

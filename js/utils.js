@@ -212,3 +212,42 @@ const ScrollReveal = (() => {
 
   return { init };
 })();
+
+
+/* ============ MODULE: MỞ THIỆP KÉO RÈM (DOORS OPEN) ============ */
+const Envelope = (() => {
+  function init() {
+    const overlay = document.getElementById('envelope-overlay');
+    const wrapper = document.getElementById('envelope-wrapper');
+    const lockBtn = document.getElementById('door-lock');
+
+    if (!overlay || !wrapper || !lockBtn) return;
+
+    // Vô hiệu hóa lướt trang khi overlay còn hiện
+    document.body.style.overflow = 'hidden';
+
+    // Xử lý khi click vào nút "Mở Thiệp"
+    lockBtn.addEventListener('click', () => {
+      // 1. Chạy CSS animation kéo rèm sang 2 bên
+      wrapper.classList.add('open');
+
+      // 2. Chờ 1.8s để xem hết animation cửa mở, sau đó fade out overlay
+      setTimeout(() => {
+        overlay.classList.add('hidden');
+        document.body.style.overflow = ''; // Cho phép cuộn lại
+
+        // 3. Tự động bật nhạc
+        if (typeof MusicPlayer !== 'undefined') {
+          MusicPlayer.play();
+        }
+
+        // 4. Khởi chạy 1 đợt Confetti (Hoa giấy) để ăn mừng
+        if (typeof GiftBox !== 'undefined' && GiftBox.fireConfetti) {
+           GiftBox.fireConfetti();
+        }
+      }, 1800);
+    });
+  }
+
+  return { init };
+})();

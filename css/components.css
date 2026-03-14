@@ -390,3 +390,192 @@
   0%   { transform: translateY(0) rotate(0deg); opacity: 1; }
   100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
 }
+
+/* ============================================================
+   HIỆU ỨNG THIỆP CƯỚI KÉO RÈM (RED VELVET DOORS)
+   ============================================================ */
+.envelope-overlay {
+  position: fixed;
+  inset: 0;
+  background: #1a0808; /* Màu nền tối phía sau thiệp */
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1.5s ease, visibility 1.5s;
+}
+
+.envelope-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Wrapper kích thước to toàn màn hình hoặc khối lớn */
+.wedding-doors-wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+/* Base cho 2 cánh cửa */
+.door {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(135deg, #a6121f 0%, #7d0813 100%); /* Màu đỏ nhung tuyết */
+  box-shadow: inset 0 0 80px rgba(0,0,0,0.5);
+  transition: transform 1.8s cubic-bezier(0.86, 0, 0.07, 1);
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.door-left {
+  transform-origin: left center;
+  border-right: 2px solid #dab567;
+  justify-content: flex-end;
+}
+
+.door-right {
+  transform-origin: right center;
+  border-left: 2px solid #dab567;
+  justify-content: flex-start;
+}
+
+/* Pattern hoa văn chìm trên cánh thiệp */
+.door-pattern {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  background-image: radial-gradient(#dab567 1px, transparent 1px);
+  background-size: 20px 20px;
+  pointer-events: none;
+}
+
+/* Chữ H lớn trên mỗi cánh */
+.door-text {
+  padding: 40px;
+  color: #dab567;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+  z-index: 2;
+  opacity: 0.8;
+}
+
+.door-initial {
+  font-family: var(--font-script);
+  font-size: clamp(6rem, 15vw, 12rem);
+  font-style: italic;
+  line-height: 1;
+}
+
+/* Chốt khóa / Nút "Mở Thiệp" ở chính giữa */
+.door-lock {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  cursor: pointer;
+  transition: all 0.5s ease;
+}
+
+.lock-circle {
+  width: 100px; height: 100px;
+  background: linear-gradient(135deg, #efd48e 0%, #dab567 50%, #9e7f3c 100%);
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6), inset 0 0 10px rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.lock-circle::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 2px dashed rgba(100,20,20,0.4);
+  border-radius: 50%;
+  animation: spin-slow 20s linear infinite;
+}
+
+.lock-text {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: #5a0c14; /* Đỏ đô thẫm */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  z-index: 2;
+}
+
+.door-lock:hover .lock-circle {
+  transform: scale(1.1);
+  box-shadow: 0 15px 40px rgba(218,181,103,0.4), inset 0 0 15px rgba(255,255,255,0.6);
+}
+
+@keyframes spin-slow {
+  100% { transform: rotate(360deg); }
+}
+
+/* TRẠNG THÁI MỞ (Kéo rèm sang 2 bên) */
+.wedding-doors-wrapper.open .door-left {
+  transform: translateX(-100%);
+}
+
+.wedding-doors-wrapper.open .door-right {
+  transform: translateX(100%);
+}
+
+.wedding-doors-wrapper.open .door-lock {
+  transform: translate(-50%, -50%) scale(2);
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* ============================================================
+   CORNER RIBBON (RUY BĂNG GÓC)
+   ============================================================ */
+.corner-ribbon {
+  position: fixed;
+  top: 25px;
+  right: -50px;
+  width: 200px;
+  background: var(--gold);
+  color: var(--white);
+  text-align: center;
+  padding: 8px 0;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transform: rotate(45deg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 800; /* Dưới phong bì nhưng trên content */
+  pointer-events: none;
+}
+
+.corner-ribbon::before,
+.corner-ribbon::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  border-top: 4px solid #8b6e3f;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+}
+
+.corner-ribbon::before { left: 0; }
+.corner-ribbon::after { right: 0; }
+
+@media (max-width: 768px) {
+  .corner-ribbon {
+    top: 20px;
+    right: -60px;
+    width: 200px;
+    font-size: 0.7rem;
+  }
+}
