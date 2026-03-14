@@ -231,17 +231,19 @@ const Envelope = (() => {
       // 1. Chạy CSS animation kéo rèm sang 2 bên
       wrapper.classList.add('open');
 
-      // 2. Chờ 1.8s để xem hết animation cửa mở, sau đó fade out overlay
+      // 2. Bật nhạc ngay lập tức khi người dùng click (trải nghiệm tốt nhất trên mobile)
+      if (typeof MusicPlayer !== 'undefined' && typeof MusicPlayer.play === 'function') {
+        MusicPlayer.play();
+      }
+
+      // 3. Sau khoảng 800ms (lúc cánh cửa vừa kéo hé ra), bắt đầu fade out nền đen phía sau
       setTimeout(() => {
         overlay.classList.add('hidden');
+      }, 800);
+
+      // 4. Khi cửa kéo xong hẳn (khoảng 1800ms) thì bật cuộn lại và nổ pháo hoa
+      setTimeout(() => {
         document.body.style.overflow = ''; // Cho phép cuộn lại
-
-        // 3. Tự động bật nhạc
-        if (typeof MusicPlayer !== 'undefined') {
-          MusicPlayer.play();
-        }
-
-        // 4. Khởi chạy 1 đợt Confetti (Hoa giấy) để ăn mừng
         if (typeof GiftBox !== 'undefined' && GiftBox.fireConfetti) {
            GiftBox.fireConfetti();
         }

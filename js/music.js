@@ -71,5 +71,5 @@ const MusicPlayer = (() => {
     btn.title = playing ? 'Tắt nhạc' : 'Bật nhạc';
   }
 
-  return { init, toggle };
+  return { init, toggle, play, pause };
 })();
