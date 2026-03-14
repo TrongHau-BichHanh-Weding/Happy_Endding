@@ -73,19 +73,42 @@
 
 /* ---- Khung ảnh cưới chính ---- */
 .hero-photo-wrap {
-  width: min(85vw, 380px);
-  border-radius: 4px;
+  width: min(88vw, 400px);
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 16px 48px rgba(44,44,44,0.18);
+  box-shadow:
+    0 2px 0 0 var(--gold-light),
+    0 4px 0 0 rgba(201,169,110,0.3),
+    0 20px 60px rgba(44,44,44,0.25);
   animation: fadeUp 1s 0.5s ease both;
   position: relative;
+  /* Viền gradient vàng sang trọng */
+  outline: 2px solid rgba(201,169,110,0.4);
+  outline-offset: 4px;
+}
+
+/* Shine sweep khi load */
+.hero-photo-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.18), transparent);
+  animation: shimmer 2.5s 1.2s ease forwards;
+  pointer-events: none;
+  z-index: 2;
+}
+@keyframes shimmer {
+  0%   { left: -100%; opacity: 1; }
+  100% { left: 160%;  opacity: 0; }
 }
 
 .hero-photo-wrap img {
   width: 100%;
-  height: auto;
+  height: 520px;
   display: block;
   object-fit: cover;
+  object-position: center top;
 }
 
 /* ---- Petals rơi (canvas overlay) ---- */
@@ -109,4 +132,8 @@
 /* ---- Responsive ---- */
 @media (max-width: 380px) {
   .hero-names { flex-direction: column; gap: 4px; }
+  .hero-photo-wrap img { height: 420px; }
+}
+@media (min-width: 600px) {
+  .hero-photo-wrap img { height: 600px; }
 }
